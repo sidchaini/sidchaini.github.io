@@ -56,8 +56,8 @@
 										<h2>Hey,
 											<script>
 												var hour = new Date().getHours();
-												if (hour < 12 && hour > 5) {document.write("good morning!");}
-												else if (hour < 17) {document.write("good afternoon!");}
+												if (hour < 12 && hour >= 5) {document.write("good morning!");}
+												else if (hour >=12 && hour < 17) {document.write("good afternoon!");}
 												else  {document.write("good evening!");}
 											</script>
 										</h2>

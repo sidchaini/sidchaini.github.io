@@ -18,7 +18,13 @@ const darkTheme = {
     "--sidebar-color": "#0076A8"
   };
   
-  let currentTheme = lightTheme;
+  // let currentTheme = lightTheme;
+
+  let currentTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  ? darkTheme
+  : lightTheme;
+
+  applyTheme(currentTheme);
   
   function applyTheme(theme) {
     let root = document.documentElement;
@@ -41,5 +47,12 @@ const darkTheme = {
     } else {
       applyTheme(lightTheme);
     }
+  }
+
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      currentTheme = e.matches ? darkTheme : lightTheme;
+      applyTheme(currentTheme);
+    });
   }
   

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Light curve classification using distance metrics</title>
+  <title>Light Curve Classification using Distance Metrics</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: 'Arial', sans-serif;
       text-align: center;
-      padding: 50px;
+      padding: 20px;
       background-color: #2c3e50;
       color: #ffffff;
       min-height: 100vh;
@@ -35,6 +36,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 80%; /* Responsive width */
     }
     .button i {
       margin-right: 10px;
@@ -44,15 +46,28 @@
       background-color: #8e44ad;
     }
     h1 {
-      font-size: 36px;
+      font-size: 24px; /* Smaller font size for better mobile viewing */
       margin-bottom: 0.3em;
     }
     h1 span {
       color: #ffd200;
     }
     h4 {
-      margin-top: 0.1em;
+    margin-top: 1em;
+    font-size: 16px; /* Default font size for smaller devices */
+    font-weight: normal;
+  }
+
+  /* Media query for devices with a width of 768px or more */
+  @media (min-width: 768px) {
+    h4 {
+      font-size: 20px; /* Larger font size for PC viewing */
     }
+    h1 {
+      font-size: 28px; /* Larger font size for PC viewing */
+    }
+
+  }
   </style>
 </head>
 <body>
@@ -61,7 +76,7 @@
   <div class="button-container">
     <a href="https://arxiv.org/abs/2403.12120" class="button"><i class="fas fa-link"></i>ArXiv Preprint (submitted to A&C)!</a>
     <a href="https://forms.gle/4tZoBECBKVfpTjLB9" class="button"><i class="fas fa-link"></i>Ask questions here</a>
-<!--     <a href="https://sidchaini.github.io/posters/Sid_LCDC_Poster.pdf" class="button"><i class="fas fa-link"></i>Poster PDF</a> -->
+    <!-- <a href="https://sidchaini.github.io/posters/Sid_LCDC_Poster.pdf" class="button"><i class="fas fa-link"></i>Poster PDF</a> -->
   </div>
 </body>
 </html>

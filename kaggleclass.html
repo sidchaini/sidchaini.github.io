@@ -21,6 +21,7 @@
       padding: 20px 30px;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: relative; /* Needed for absolute positioning of toggle button */
     }
     h1, h2, h3 {
       color: #2c3e50; /* Dark blue for headings */
@@ -99,6 +100,12 @@
       .button { width: 90%; font-size: 15px; padding: 10px 25px; }
       h1 { font-size: 22px; }
       h2 { font-size: 18px; }
+      #toggle-all-button { /* Adjust toggle button position on smaller screens */
+        top: 65px;
+        right: 15px;
+        font-size: 11px;
+        padding: 4px 8px;
+      }
     }
 
     /* Styles for collapsible sections */
@@ -123,16 +130,41 @@
     }
     .collapsible-content {
         display: none; /* Hidden by default */
-        padding-left: 15px; /* Indent content slightly */
+        padding: 10px 15px; /* Indent content slightly & add padding */
         margin-bottom: 15px; /* Add space below content */
         overflow: hidden; /* Smooth transition */
+        border-radius: 4px; /* Slightly rounded corners for background */
     }
+    /* Background for top-level sections */
+    h2.collapsible-trigger + .collapsible-content {
+        background-color: #f8f9fa; /* Light grey background */
+    }
+
+    /* Toggle All Button Styles */
+    #toggle-all-button {
+        position: absolute;
+        top: 75px; /* Adjust as needed */
+        right: 30px; /* Adjust as needed */
+        padding: 5px 10px;
+        font-size: 12px;
+        cursor: pointer;
+        background-color: #6c757d; /* Neutral grey */
+        color: white;
+        border: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+    #toggle-all-button:hover {
+        background-color: #5a6268; /* Darker grey on hover */
+    }
+
   </style>
 </head>
 <body>
   <div class="container">
     <h1><span>Kaggle</span>: Why and How I use it</h1>
     <h3 align="center">Siddharth Chaini - 2025-04-22</h3>
+    <button id="toggle-all-button">Expand All</button>
 
     <h2 class="collapsible-trigger">1. About Kaggle <i class="fas fa-chevron-right"></i></h2>
     <div class="collapsible-content">
@@ -215,6 +247,31 @@
           }
         });
       });
+
+      // --- Add JavaScript for Toggle All Button Here ---
+      const toggleAllButton = document.getElementById('toggle-all-button');
+      const allTriggers = document.querySelectorAll('.collapsible-trigger');
+      const allContents = document.querySelectorAll('.collapsible-content');
+
+      if (toggleAllButton && allTriggers.length > 0 && allContents.length > 0) {
+        toggleAllButton.addEventListener('click', function() {
+          const shouldExpand = this.textContent === 'Expand All';
+
+          allTriggers.forEach(trigger => {
+            if (shouldExpand) {
+              trigger.classList.add('active');
+            } else {
+              trigger.classList.remove('active');
+            }
+          });
+
+          allContents.forEach(content => {
+            content.style.display = shouldExpand ? 'block' : 'none';
+          });
+
+          this.textContent = shouldExpand ? 'Collapse All' : 'Expand All';
+        });
+      }
     });
   </script>
 

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kaggle: Why and how I use it</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+      background-color: #f4f4f9; /* Lighter background */
+      color: #333; /* Darker text */
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #ffffff; /* White content background */
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2, h3 {
+      color: #2c3e50; /* Dark blue for headings */
+      margin-bottom: 0.5em;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 1em;
+    }
+    h1 span {
+      color: #e67e22; /* Kaggle orange-ish */
+    }
+    p, ul {
+      margin-bottom: 1em;
+    }
+    ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 0.5em;
+    }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+      gap: 10px; /* Add gap between buttons */
+    }
+    .button {
+      padding: 12px 30px;
+      font-size: 16px;
+      text-decoration: none;
+      border: none;
+      border-radius: 25px; /* More rounded */
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      background-color: #3498db; /* Kaggle blue */
+      color: #ffffff;
+      display: inline-flex; /* Align icon and text */
+      align-items: center;
+      justify-content: center;
+      width: 80%; /* Responsive width */
+      max-width: 350px; /* Max width for larger screens */
+      text-align: center;
+    }
+    .button i {
+      margin-right: 8px;
+    }
+    .button:hover {
+      transform: scale(1.03);
+      background-color: #2980b9; /* Darker blue on hover */
+    }
+    .comparison li {
+        margin-bottom: 0.8em;
+    }
+    .comparison strong {
+        color: #2980b9; /* Highlight key advantage terms */
+    }
+    code {
+        background-color: #eee;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-family: monospace;
+    }
+    a {
+        color: #3498db; /* Consistent link color */
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      body { padding: 15px; }
+      .container { padding: 15px 20px; }
+      .button { width: 90%; font-size: 15px; padding: 10px 25px; }
+      h1 { font-size: 22px; }
+      h2 { font-size: 18px; }
+    }
+
+    /* Styles for collapsible sections */
+    .collapsible-trigger {
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+        margin-bottom: 10px; /* Add space below trigger */
+        position: relative; /* For positioning the arrow */
+    }
+    .collapsible-trigger i {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%) rotate(0deg); /* Initial state */
+        transition: transform 0.3s ease;
+        font-size: 14px;
+        color: #3498db;
+    }
+    .collapsible-trigger.active i {
+        transform: translateY(-50%) rotate(90deg); /* Rotated state */
+    }
+    .collapsible-content {
+        display: none; /* Hidden by default */
+        padding-left: 15px; /* Indent content slightly */
+        margin-bottom: 15px; /* Add space below content */
+        overflow: hidden; /* Smooth transition */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><span>Kaggle</span>: Why and How I use it</h1>
+    <h3 align="center">Siddharth Chaini - 2025-04-22</h3>
+
+    <h2 class="collapsible-trigger">1. About Kaggle <i class="fas fa-chevron-right"></i></h2>
+    <div class="collapsible-content">
+        <h3 class="collapsible-trigger">1.1 What is Kaggle?<i class="fas fa-chevron-right"></i></h3>
+        <div class="collapsible-content">
+        <p>Kaggle is an online platform for data science and machine learning practitioners. It originally started as a hub for data science competitions. Over time, it's grown into a broader ecosystem with support for running Jupyter Notebooks, hosting datasets, sharing models, and even offering short courses via guided notebooks.
+        </div>
+        <h3 class="collapsible-trigger">1.2 How I use it to code (comparison with Colab)<i class="fas fa-chevron-right"></i></h3>
+        <div class="collapsible-content">
+        Kaggle also allows you to use their platform to code, very similar to Google Colab. But there are a few reasons I prefer Kaggle over 
+        <ul class="comparison">
+        <li><strong>Free GPU/TPU Access</strong> <br> While both Kaggle and Colab offer free accelerator access, Kaggle explicitly displays a weekly quota (e.g., 30 hours of GPU time), so you can plan around that.</li>
+        <li><strong><span style="color: #e67e22;">Cloud Execution & Saving</span></strong> <br> Kaggle's <i>"Save & Run All (Commit)"</i> feature executes your entire notebook on a separate cloud instance. That means - you can close your browser, and it will continue running (up to a time limit of 9 hours). And outputs and generated files are saved with the version!</li>
+        <li><strong>Versioning</strong> <br> Every time you <i>"Commit"</i>, Kaggle saves a snapshot of your notebook and its outputs on their website. You can easily share, review and revert to previous versions!</li>
+        <li><strong>GitHub Integration</strong> <br> You can also link your GitHub, so that Kaggle automatically pushes your notebook to GitHub at the end of each commit, allowing you to have another backup of everything.</li>
+        <li><strong>Faster Dataset Access</strong> <br> You can use datasets hosted directly on Kaggle (and even upload your own private datasets), which is usually significantly faster than accessing Google Drive files on Colab.</li>
+        <li><strong>Scheduled Runs</strong> <br> Kaggle allows you to schedule notebook runs (daily, weekly, etc.), which can be very useful for automated tasks like data updates or model retraining, especially when you're working with live data.</li>
+        </ul>
+        </div>
+    </div>
+
+    <h2 class="collapsible-trigger">2. Kaggle Competitions <i class="fas fa-chevron-right"></i></h2>
+    <div class="collapsible-content">
+        <p>Kaggle is most known for its competitions, where individuals and teams compete to build the best models and submit solutions for a given challenge. Anyone can host a competitions, and there are often big monetary prizes on offer for the best solution.</p>
+
+        <h3 class="collapsible-trigger">2.1 In-class competitions<i class="fas fa-chevron-right"></i></h3>
+        <div class="collapsible-content">
+        <p>Kaggle allows hosting in-class competitions (like for PHYS 664), great for learning the platform and its leaderboard system designed to prevent overfitting:
+            <ul>
+                <li><strong>Public Leaderboard:</strong> Score on a <i>subset</i> of test data, visible during the competition.</li>
+                <li><strong>Private Leaderboard:</strong> Final score on the <i>remaining</i> test data, revealed after the competition ends.</li>
+            </ul>
+        This encourages models that generalize well.
+        </p>
+        </div>
+        <h3 class="collapsible-trigger">2.2 Real-world competitions<i class="fas fa-chevron-right"></i></h3>
+        <div class="collapsible-content">
+        <p>Exploring public competitions is a great way to practice skills on real-world problems! If you can win, there's large monetary rewards available. But more importantly, most winners generally share their winning code, making it a great resource to learn!</p>
+        <div class="button-container">
+            <a href="https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting" target="_blank" class="button"><i class="fas fa-chart-line"></i> Example: Jane Street Market Prediction ($120,000)</a>
+        </div>
+        </div>
+    </div>
+
+    <h2 class="collapsible-trigger">3. Personal Example: PLAsTiCC Challenge <i class="fas fa-chevron-right"></i></h2>
+    <div class="collapsible-content">
+        <p>The Photometric LSST Astronomical Time-Series Classification Challenge (PLAsTiCC) was a Kaggle competition aimed at classifying astronomical objects based on their light curves (time-series data of brightness).</p>
+        <div class="button-container">
+          <a href="https://www.kaggle.com/competitions/PLAsTiCC-2018" target="_blank" class="button"><i class='fa-brands fa-kaggle'></i>PLAsTiCC</a>
+      </div>
+        <h3 class="collapsible-trigger">3.1 My Code<i class="fas fa-chevron-right"></i></h3>
+        <div class="collapsible-content">
+          This is relevant to our class as it involved analyzing time-domain data using machine learning. My approach utilized Gated Recurrent Units (GRUs), a type of recurrent neural network well-suited for sequential data.
+        <p>You can explore the work here:</p>
+        <div class="button-container">
+            <a href="https://www.kaggle.com/code/siddharthchaini/functional-api-plasticc-scssk" target="_blank" class="button"><i class='fa-brands fa-kaggle'></i>Example Kaggle Notebook (GRU Model)</a>
+            <a href="https://github.com/sidchaini/Astronomical-Classification-PLASTICC" target="_blank" class="button"><i class="fa-brands fa-github"></i>Full Project GitHub Repository</a>
+        </div>
+        </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const triggers = document.querySelectorAll('.collapsible-trigger');
+
+      triggers.forEach(trigger => {
+        trigger.addEventListener('click', function() {
+          // Toggle the 'active' class on the trigger
+          this.classList.toggle('active');
+
+          // Get the next element sibling, which is the content div
+          const content = this.nextElementSibling;
+
+          // Toggle display
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

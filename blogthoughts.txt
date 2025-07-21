@@ -1,0 +1,28 @@
+- I've decided to start blogging. 
+    - For myself, to organize my thoughts and notedown my skills!
+    - AI assisted writing can help me do this!
+    BUT ALL thoughts are my own :)
+- blog on piecewise functions
+- blog on TF, a second look
+- blog on notes from "pitfalls of chatgpt"
+- blog on thoughts of doing a PhD: continously positive
+ blog on work travels
+    - VOSS
+    - Rare Gems
+    - Rubin CW
+    - LSST@Europe
+    - IUCAA conference
+- blog on academic journey
+- blog on things to study/do to "become me"
+    - book recommendations
+- blog on things I found useful in college when taking classes
+    - highlight PDFs
+    - make small sheet of notes with formulae/derivations of highlights for a quiz
+    - for the next quiz, "distill" make a new sheet with shorter notes of things you only need
+- md/notebook explaining each paper of mine (general public)
+- md/notebooks with COMPLETE paper and code (tip: use marker)
+- why use ML in (TD) astro?
+- how can I use AI tools to improve outreach?
+- early internet, late internet, social media, AI-era Internet
+- Convert astrostatistics books/code to website
+- Blog on statistics Zeljko lecture

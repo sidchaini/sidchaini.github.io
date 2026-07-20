@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chai</title>
+<style>
+  :root {
+    --bg: #fbfdf9;        /* white, with the faintest green cast */
+    --card: #ffffff;
+    --ink: #21271d;
+    --mute: #6d7a67;
+    --line: #e8efe0;
+    --accent: #4a7c25;    /* text-safe green — markers, emphasis, focus */
+    --wash: #f0f7e6;      /* soft lime wash for panels */
+    --sel-bg: #dcefc4;    /* selected pill */
+    --sel-ink: #35521a;
+    --sel-line: #a8d474;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #131711;
+      --card: #1b201a;
+      --ink: #e6ece1;
+      --mute: #949e8e;
+      --line: #2b332a;
+      --accent: #a5d666;
+      --wash: #1f2a17;
+      --sel-bg: #2f4420;
+      --sel-ink: #cbe8a0;
+      --sel-line: #4d7030;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem 4rem;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.65 system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 34rem; margin: 0 auto; }
+
+  h1 {
+    font: 600 2rem/1.2 ui-serif, Georgia, serif;
+    margin: 0 0 .3rem;
+    letter-spacing: -.01em;
+  }
+  .tagline { margin: 0 0 2rem; color: var(--mute); font-size: .95rem; }
+
+  /* ---- controls ---- */
+  .variants { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.25rem; }
+  .variants button {
+    font: inherit;
+    padding: .45rem .85rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--mute);
+    cursor: pointer;
+    transition: .15s;
+  }
+  .variants button:hover { border-color: var(--sel-line); color: var(--ink); }
+  /* Soft lime fill with deep-green text, rather than white-on-lime — saturated
+     greens are too light to carry white text at accessible contrast. */
+  .variants button[aria-pressed="true"] {
+    background: var(--sel-bg);
+    border-color: var(--sel-line);
+    color: var(--sel-ink);
+    font-weight: 600;
+  }
+
+  .scale {
+    display: flex;
+    align-items: flex-end;
+    gap: .75rem;
+    flex-wrap: wrap;
+    padding: 1rem 1.1rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: .7rem;
+  }
+  .field { display: flex; flex-direction: column; gap: .3rem; }
+  .field label { font-size: .78rem; color: var(--mute); text-transform: uppercase; letter-spacing: .06em; }
+  .field input {
+    font: inherit;
+    width: 5.5rem;
+    padding: .4rem .55rem;
+    border: 1px solid var(--line);
+    border-radius: .4rem;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .field input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .times { padding-bottom: .5rem; color: var(--mute); }
+
+  .sourcing {
+    margin: 1.5rem 0 0;
+    color: var(--mute);
+    font-size: .9rem;
+    font-style: italic;
+  }
+
+  /* ---- ingredients ---- */
+  h2 {
+    font: 600 .78rem/1 system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    color: var(--mute);
+    margin: 2rem 0 .75rem;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: .5rem 0; border-bottom: 1px solid var(--line); vertical-align: baseline; }
+  tr:last-child td { border-bottom: 0; }
+  td.amt { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 500; }
+  td.note { color: var(--mute); font-size: .85rem; padding-left: .6rem; width: 1%; white-space: nowrap; }
+
+  /* ---- steps ---- */
+  ol { margin: 0; padding-left: 1.35rem; }
+  ol li { margin-bottom: .7rem; }
+  ol li::marker { color: var(--accent); font-weight: 600; }
+  ol b { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .note-box {
+    margin-top: 2.25rem;
+    padding: .9rem 1.1rem;
+    background: var(--wash);
+    border-left: 3px solid var(--sel-line);
+    border-radius: .6rem;
+    font-size: .88rem;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .note-box strong { color: var(--accent); }
+
+  footer { margin-top: 2.5rem; color: var(--mute); font-size: .8rem; }
+
+  @media print {
+    .variants, .scale { display: none; }
+    body { padding: 0; background: #fff; color: #000; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Chai</h1>
+  <p class="tagline">Ginger chai, by weight. Pick a variant, set the scale.</p>
+
+  <!-- ============================================================
+       To add a new tea: copy one VARIANTS entry below and edit the
+       numbers. Nothing else needs to change.
+       ============================================================ -->
+  <div class="variants" id="variants"></div>
+
+  <div class="scale">
+    <div class="field">
+      <label for="servings">Servings</label>
+      <input id="servings" type="number" inputmode="decimal" value="1" min="0.5" step="0.5">
+    </div>
+    <span class="times">&times;</span>
+    <div class="field">
+      <label for="perServing">g water each</label>
+      <input id="perServing" type="number" inputmode="decimal" value="200" min="50" step="10">
+    </div>
+  </div>
+
+  <p class="sourcing" id="sourcing"></p>
+
+  <h2>Ingredients</h2>
+  <table><tbody id="ingredients"></tbody></table>
+
+  <h2>Method</h2>
+  <ol id="steps"></ol>
+
+  <div class="note-box">
+    <strong>Scaling up?</strong> Bigger pots have more surface area per unit volume, so more
+    water boils off on the way up. If the container gets much wider, start with ~5% extra water.
+  </div>
+
+  <footer id="footer"></footer>
+</main>
+
+<script>
+// ---------------------------------------------------------------------------
+// VARIANTS — one object per recipe.
+//   water   grams of water the recipe is written for; the scaling anchor.
+//   items   everything else. `g` is a number or a [min, max] range.
+//   label   name in the ingredients table.  inline  name used inside step text.
+//   note    qualifier shown only in the table (whole / skim).
+//   steps   optional — overrides the shared STEPS template below.
+// ---------------------------------------------------------------------------
+const VARIANTS = [
+  {
+    id: 'deus',
+    label: 'DEUS',
+    sourcing: 'Society Premium CTC black tea, whole milk (e.g. Food Lion), fresh ginger',
+    water: 200,
+    items: [
+      { id: 'ginger', label: 'Ginger, fresh',        g: [5, 7] },
+      { id: 'sugar',  label: 'Sugar',                g: 3.5 },
+      { id: 'milk',   label: 'Milk', note: 'whole',  g: 25 },
+      { id: 'tea',    label: 'Society Premium CTC',  g: 2.7, inline: 'society tea' },
+    ],
+    steep: 'Steep for 45-60s (a bit more if you want it stronger).',
+  },
+  {
+    id: 'knde',
+    label: 'KNDE',
+    sourcing: 'Tata Tea Gold CTC, skim milk (e.g. Kaufland), fresh ginger',
+    water: 200,
+    items: [
+      { id: 'ginger', label: 'Ginger, fresh',        g: 8 },
+      { id: 'sugar',  label: 'Sugar',                g: [3, 3.2] },
+      { id: 'milk',   label: 'Milk', note: 'skim',   g: 28 },
+      { id: 'tea',    label: 'Tata Tea Gold CTC',    g: 2.8, inline: 'tata tea gold CTC' },
+    ],
+    steep: 'Steep for 60-90s (or more).',
+  },
+];
+
+// Shared method. {slots} are filled from the variant above.
+const STEPS = [
+  'Start boiling {water} water',
+  'Add {ginger} ginger, then wait for it to boil',
+  'Add {sugar} sugar',
+  'Let the water come to a rolling boil (you can let it be on rolling boil for a minute or ' +
+    'two to intensify ginger; but warning it might lead to less volume due to evaporation)',
+  'Once sufficiently boiled, add {milk} milk',
+  'Once milk is boiling, add {tea} {teaName}.',
+  '{steep}',
+  'Strain and serve.',
+];
+
+// --- amounts ---------------------------------------------------------------
+// Up to 2 decimals, trailing zeros dropped: 7.00 -> "7", 4.05 -> "4.05".
+const gram = n => String(Math.round(n * 100) / 100);
+const amount = (g, f) => Array.isArray(g)
+  ? gram(g[0] * f) + '-' + gram(g[1] * f) + 'g'
+  : gram(g * f) + 'g';
+
+// --- state -----------------------------------------------------------------
+let current = VARIANTS[0];
+const $ = id => document.getElementById(id);
+
+// --- render ----------------------------------------------------------------
+function render() {
+  const servings = Number($('servings').value) || 1;
+  const per = Number($('perServing').value) || current.water;
+  const factor = (servings * per) / current.water;
+
+  $('sourcing').textContent = current.sourcing;
+
+  // Ingredients table: water first, then everything else.
+  const rows = [['Water', amount(current.water, factor), '']].concat(
+    current.items.map(it => [it.label, amount(it.g, factor), it.note || ''])
+  );
+  $('ingredients').innerHTML = rows.map(([label, amt, note]) =>
+    `<tr><td>${label}</td><td class="note">${note}</td><td class="amt">${amt}</td></tr>`
+  ).join('');
+
+  // Step slots. `weights` get emphasised, `words` are dropped in as-is.
+  const weights = { water: amount(current.water, factor) };
+  const words = { steep: current.steep };
+  for (const it of current.items) {
+    weights[it.id] = amount(it.g, factor);
+    words[it.id + 'Name'] = it.inline || it.label.toLowerCase();
+  }
+
+  $('steps').innerHTML = (current.steps || STEPS).map(step =>
+    '<li>' + step.replace(/\{(\w+)\}/g, (m, key) =>
+      key in weights ? `<b>${weights[key]}</b>` : key in words ? words[key] : m) + '</li>'
+  ).join('');
+
+  document.querySelectorAll('#variants button').forEach(b =>
+    b.setAttribute('aria-pressed', String(b.dataset.id === current.id)));
+
+  $('footer').textContent = 'Scaled from ' + current.water + 'g water = 1 serving.';
+}
+
+// --- wire up ---------------------------------------------------------------
+$('variants').innerHTML = VARIANTS.map(v =>
+  `<button type="button" data-id="${v.id}" aria-pressed="false">${v.label}</button>`
+).join('');
+
+$('variants').addEventListener('click', e => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  current = VARIANTS.find(v => v.id === btn.dataset.id);
+  render();
+});
+
+$('servings').addEventListener('input', render);
+$('perServing').addEventListener('input', render);
+
+render();
+</script>
+</body>
+</html>

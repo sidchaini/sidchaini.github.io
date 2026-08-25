@@ -28,6 +28,7 @@ const darkTheme = {
   
   function applyTheme(theme) {
     let root = document.documentElement;
+    root.classList.toggle("dark-mode", theme === darkTheme);
     root.style.setProperty("--accent-color", theme["--accent-color"]);
     root.style.setProperty("--background-color", theme["--background-color"]);
     root.style.setProperty("--color-text", theme["--color-text"]);
@@ -38,6 +39,15 @@ const darkTheme = {
     root.style.setProperty("--footer-color", theme["--footer-color"]);
     root.style.setProperty("--sep-color", theme["--sep-color"]);
     root.style.setProperty("--sidebar-color", theme["--sidebar-color"]);
+
+    const distclassipyLogo = document.getElementById("distclassipy-logo");
+
+    if (distclassipyLogo) {
+      distclassipyLogo.src =
+        theme === darkTheme
+          ? distclassipyLogo.dataset.darkSrc
+          : distclassipyLogo.dataset.lightSrc;
+    }
     currentTheme = theme;
   }
   

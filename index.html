@@ -25,6 +25,9 @@
 		<link rel="stylesheet" href="assets/css/nightlanp.css" />
 		<script src="assets/js/nightlanp-svg.js" defer></script>
 		<script src="assets/js/nightlanp.js" defer></script>
+		<link rel="stylesheet" href="assets/css/distance-space.css" />
+		<script src="assets/data/fink-tns-sample.js" defer></script>
+		<script src="assets/js/distance-space.js" defer></script>
 		<link rel="icon" href="https://www.svgrepo.com/show/65839/telescope.svg" />
 		<meta name="google-site-verification" content="NHOjBPf1oSEHxgQb6uy6zUGyjwkc_NFgHAuC-VjuSIY" />
 	</head>
@@ -151,7 +154,10 @@
 							</article>
 
 							<article>
-								<a class="image"><img src="images/dimmad-plot.png" alt="DiMMAD anomaly detection results" /></a>
+								<div class="image distance-space-teaser-link" aria-label="DiMMAD comparing a TDE anomaly across distance geometries">
+									<span data-distance-space="compact"></span>
+									<noscript><img src="images/dimmad-plot.png" alt="DiMMAD anomaly detection results" /></noscript>
+								</div>
 								<div class="inner">
 									<h4><a href="https://arxiv.org/abs/2510.23702">Finding the unknown unknowns with multiple geometries</a></h4>
 									<p>DiMMAD combines multiple distance metrics from DistClassiPy to calculate an anomaly score which helps find objects out-of-distribution - sources most likely to represent undiscovered phenomena.</p>

@@ -190,6 +190,22 @@
     margin-bottom: 0.65em;
 }
 
+.project-badges {
+    display: block;
+    margin-top: 0.6em;
+    line-height: 1.9;
+}
+
+.project-badges a {
+    border-bottom: none;
+}
+
+.project-badges img {
+    height: 20px;
+    width: auto;
+    vertical-align: middle;
+}
+
 .project-links {
     font-size: 0.9em;
     margin-top: 0.6em;
